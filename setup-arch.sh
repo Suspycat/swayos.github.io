@@ -30,7 +30,7 @@ sudo pacman -S --noconfirm --needed git
 
 
 log "Cloning swayOS repo"
-git clone https://github.com/swayos/swayos.github.io.git
+git clone https://github.com/Suspycat/swayos.github.io.git
 cd swayos.github.io
 
 
@@ -48,16 +48,6 @@ check "$?" "cp"
 log "Copying settings to home folder"
 cp -f -R home/. ~/
 check "$?" "cp"
-
-
-log "Starting services"
-sudo systemctl enable iwd --now
-check "$?" "systemctl enable"
-sudo systemctl enable bluetooth --now
-check "$?" "systemctl enable"
-sudo systemctl enable cups --now
-check "$?" "systemctl enable"
-
 
 log "Installing aur packages"
 cat pacs/aur | while read line 

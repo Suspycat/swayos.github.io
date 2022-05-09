@@ -1,16 +1,37 @@
 # devices
+input "1267:12728:MSFT0002:00_04F3:31B8_Touchpad" {
+dwt enabled
+scroll_factor 0.3
+accel_profile "flat"
+pointer_accel 0.5
+tap enabled
+natural_scroll enabled
+middle_emulation enabled
+}
+input type:keyboard {
+xkb_layout hu
+xkb_numlock enabled
+}
 
 # constants
 
-set $menu wofi --show run | xargs swaymsg exec --
-set $browser google-chrome-stable --ozone-platform-hint=auto
+input "5426:110:Razer_Razer_DeathAdder_Essential" {
+accel_profile "flat"
+pointer_accel -0.5 
+}
+
+set $menu wofi --show drun --allow-images | xargs swaymsg exec --
+set $browser librewolf
 set $terminal foot
-set $screenshot grim ~/Downloads/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
-set $screenclip slurp | grim -g - ~/Downloads/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
+set $screenshot grim ~/Screenshots/screen-$(date +"%Y-%m-%d-%H-%M-%S").png
+set $screenclip slurp | grim -g - ~/Screenshots/screen-$(date +"%Y-%m-%d-%H-%M-%S").png
 
 # shortcuts
 
 set $mod Mod4
+
+output HDMI-A-2 pos 1920 0 res 1920x1080@60Hz
+output HDMI-A-1 pos 0 0 res 1920x1080@144Hz
 
 bindsym $mod+Up focus up
 bindsym $mod+Down focus down
@@ -73,7 +94,7 @@ mode "resize" {
 }
 
 bindsym $mod+Shift+c reload
-bindsym $mod+Shift+q kill
+bindsym $mod+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Space exec $menu
 bindsym $mod+Return exec $terminal
@@ -104,19 +125,30 @@ client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
 client.placeholder      #000000 #0c0c0c #ffffff #000000 
 client.background       #2B2C2B
 
-output * bg ~/.config/sway/sunset_help.jpg stretch
+output * bg ~/.config/sway/index.jpg stretch
 
 default_border none
 default_floating_border normal
+hide_edge_borders none
 
-gaps inner 5
+
+smart_gaps off
+gaps inner 0
 gaps outer 0
-gaps top -5
+gaps top 0
+gaps horizontal 0
+gaps vertical 0
+gaps right 0
+gaps bottom 0
+gaps left 0
 
+hide_edge_borders both
+hide_edge_borders smart
+
+for_window [title="Discord"] floating enable
+for_window [title="Spotify"] floating enable
 for_window [app_id="foot"] border pixel 1
 for_window [app_id="iwgtk"] floating enable
-for_window [app_id="blueman-manager"] floating enable
-for_window [app_id="blueman-manager"] resize set 1000 600
 for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="org.gnome.Nautilus"] floating enable
 for_window [app_id="gnome-system-monitor"] floating enable; resize shrink down 100px; resize shrink up 100px
@@ -125,10 +157,11 @@ for_window [app_id="wdisplays"] resize set 1000 600
 for_window [app_id="pavucontrol"] floating enable
 for_window [app_id="pavucontrol"] resize set 1000 600
 for_window [app_id="imv"] floating enable
-for_window [app_id="pamac-manager"] floating enable
 
 # auto launch applications
 
+exec nm-applet
+exec protonvpn
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec mako
 exec waybar
@@ -139,10 +172,6 @@ exec swayidle -w \
 
 exec rm -f /tmp/wob && mkfifo /tmp/wob && tail -f /tmp/wob | wob
 exec rm -f /tmp/sov && mkfifo /tmp/sov && tail -f /tmp/sov | sov
-
 # xorg setup
 
 include /etc/sway/config.d/*
-
-# on first start execute device setup
-exec sh ~/.config/sway/setup

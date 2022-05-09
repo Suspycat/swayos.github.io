@@ -3,11 +3,6 @@ mtools
 grub
 sudo
 zsh
-zsh-autosuggestions
-iwd
-bluez
-bluez-utils
-blueman
 pipewire
 pipewire-alsa
 pipewire-pulse
@@ -23,7 +18,6 @@ grim
 slurp
 waybar
 wofi
-brightnessctl
 foot
 nautilus
 libreoffice-fresh
@@ -35,5 +29,5 @@ terminus-font
 polkit-gnome
 wl-clipboard
 pavucontrol
-emacs
+neovim
 adapta-gtk-theme

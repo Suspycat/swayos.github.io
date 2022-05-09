@@ -97,14 +97,14 @@ window#waybar.chromium {
 #disk,
 #battery,
 #memory,
-#cpu
+#cpu,
+#temperature
 {
     color: rgba(255,255,255,0.3);
     /* border-bottom: 1px solid rgba(255, 255, 255, 0.7); */
 }
 
 #clock,
-#temperature,
 #network,
 #custom-media,
 #custom-wlogout,
